@@ -35,6 +35,10 @@ class DiaryViewModel (private val itemDao: ItemDao) : ViewModel(){
     private fun updateItem(item: Item) {
     }
 
+    fun retrieveItem(id: Int): LiveData<Item> {
+        return itemDao.getItem(id).asLiveData()
+    }
+
 }
 
 class DiariViewModelFactory(private val itemDao: ItemDao) : ViewModelProvider.Factory{

@@ -7,13 +7,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import poncho.boncho.studentsdiary.data.Item
 import poncho.boncho.studentsdiary.databinding.FragmentItemDetailBinding
 
 class ItemDetailFragment : Fragment() {
     private val navigationArgs: ItemDetailFragmentArgs by navArgs()
+
+    lateinit var item: Item
+
+    private val viewModel: DiaryViewModel by activityViewModels {
+        DiariViewModelFactory(
+            (activity?.application as DiaryApplication).database.itemDao()
+        )
+    }
+
+    private fun bind(item: Item) {
+        binding.apply {
+            binding.itemName.text = item.itemEvent
+            binding.itemPrice.text = item.itemTime
+            binding.itemCount.text = item.itemAddress
+            binding.itemCountLabel.text = item.itemDate
+        }
+    }
 
     private var _binding: FragmentItemDetailBinding? = null
     private val binding get() = _binding!!
@@ -55,5 +74,15 @@ class ItemDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val id = navigationArgs.itemId
+        viewModel.retrieveItem(id).observe(this.viewLifecycleOwner) {
+                selectedItem ->
+            item = selectedItem
+            bind(item)
+        }
     }
 }
