@@ -11,8 +11,10 @@ data class Item(
     val id: Int = 0,
     @ColumnInfo(name = "event")
     val itemEvent: String,
+    @ColumnInfo(name = "time")
+    var itemTime: String,
     @ColumnInfo(name = "date")
-    val itemDate: String,
+    var itemDate: String,
     @ColumnInfo(name = "address")
     val itemAddress: String,
 )

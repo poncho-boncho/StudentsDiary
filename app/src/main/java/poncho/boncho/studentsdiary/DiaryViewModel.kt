@@ -13,16 +13,26 @@ class DiaryViewModel (private val itemDao: ItemDao) : ViewModel(){
             itemDao.insert(item)
         }
     }
-    private fun getNewItemEntry(itemName: String, itemPrice: String, itemCount: String): Item {
+    private fun getNewItemEntry(itemName: String, itemPrice: String, itemDate: String, itemCount: String): Item {
         return Item(
             itemEvent = itemName,
-            itemDate = itemPrice,
+            itemTime = itemPrice,
+            itemDate = itemDate,
             itemAddress = itemCount
         )
     }
-    fun addNewItem(itemName: String, itemPrice: String, itemCount: String) {
-        val newItem = getNewItemEntry(itemName, itemPrice, itemCount)
+    fun addNewItem(itemName: String, itemPrice: String, itemDate: String, itemCount: String) {
+        val newItem = getNewItemEntry(itemName, itemPrice, itemDate, itemCount)
         insertItem(newItem)
+    }
+    fun isEntryValid(itemName: String, itemPrice: String, itemDate: String, itemCount: String): Boolean {
+        if (itemName.isBlank() || itemPrice.isBlank() || itemDate.isBlank() || itemCount.isBlank()) {
+            return false
+        }
+        return true
+    }
+
+    private fun updateItem(item: Item) {
     }
 
 }
