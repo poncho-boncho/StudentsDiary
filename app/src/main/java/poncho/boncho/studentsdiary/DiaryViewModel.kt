@@ -13,6 +13,11 @@ class DiaryViewModel (private val itemDao: ItemDao) : ViewModel(){
             itemDao.insert(item)
         }
     }
+    fun deleteItem(item: Item) {
+        viewModelScope.launch {
+            itemDao.delete(item)
+        }
+    }
     private fun getNewItemEntry(itemName: String, itemPrice: String, itemDate: String, itemCount: String): Item {
         return Item(
             itemEvent = itemName,

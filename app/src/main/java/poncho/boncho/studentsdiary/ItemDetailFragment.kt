@@ -31,6 +31,7 @@ class ItemDetailFragment : Fragment() {
             binding.itemPrice.text = item.itemTime
             binding.itemCount.text = item.itemAddress
             binding.itemCountLabel.text = item.itemDate
+            deleteItem.setOnClickListener { showConfirmationDialog() }
         }
     }
 
@@ -65,6 +66,7 @@ class ItemDetailFragment : Fragment() {
      * Deletes the current item and navigates to the list fragment.
      */
     private fun deleteItem() {
+        viewModel.deleteItem(item)
         findNavController().navigateUp()
     }
 
