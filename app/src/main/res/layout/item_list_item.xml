@@ -33,7 +33,7 @@
     <TextView
         android:id="@+id/item_date"
         style="@style/Widget.Inventory.Header"
-        android:layout_below="@+id/item_name"
+        android:layout_below="@+id/item_price"
         android:layout_marginStart="@dimen/margin_between_elements"
         android:text="@string/date_req"
         android:textAlignment="center"
@@ -71,17 +71,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_between_elements"
-        android:layout_marginBottom="@dimen/margin_between_elements"
-        android:contentDescription="@string/add_new_item"
-        android:src="@android:drawable/ic_input_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

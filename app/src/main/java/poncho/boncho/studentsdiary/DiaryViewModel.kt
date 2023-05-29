@@ -1,13 +1,13 @@
 package poncho.boncho.studentsdiary
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import poncho.boncho.studentsdiary.data.Item
 import poncho.boncho.studentsdiary.data.ItemDao
 
 class DiaryViewModel (private val itemDao: ItemDao) : ViewModel(){
+
+    val allItems: LiveData<List<Item>> = itemDao.getItems().asLiveData()
     private fun insertItem(item: Item) {
         viewModelScope.launch {
             itemDao.insert(item)
